@@ -8,12 +8,12 @@
 -- met:
 --
 --     Redistributions of source code must retain the above copyright
---     notice, this list of conditions and the following disclaimer. 
+--     notice, this list of conditions and the following disclaimer.
 --
 --     Redistributions in binary form must reproduce the above copyright
 --     notice, this list of conditions and the following disclaimer in the
 --     documentation and/or other materials provided with the
---     distribution.  
+--     distribution.
 --
 -- THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
 -- IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
@@ -157,6 +157,7 @@ local types = {
         color.g = value.g
         color.b = value.b
         color.a = value.a
+
         color.rgba_table = {color.r, color.g, color.b, color.a}
         color.rgba = function()
             return color.r, color.g, color.b, color.a

@@ -56,7 +56,7 @@
             ["Europe/Berlin", "Europa / Berlin"]
         ],
         "default": "UTC"
-    },  
+    },
 
     {
         "title": "Slides",
@@ -85,7 +85,7 @@
         "type": "duration",
         "hint": "How long to display room information",
         "default": 10
-    },  
+    },
 
     {
         "title": "Scheduling",
@@ -122,34 +122,6 @@
             "title": "Device Serial",
             "ui_width": 4,
             "name": "serial",
-            "doc_link": true,
-            "type": "string",
-            "default": ""
-        }, {
-            "title": "Dect",
-            "ui_width": 3,
-            "name": "dect",
-            "doc_link": true,
-            "type": "string",
-            "default": ""
-        }, {
-            "title": "Translation",
-            "ui_width": 3,
-            "name": "translation",
-            "doc_link": true,
-            "type": "string",
-            "default": ""
-        }, {
-            "title": "Hashtag",
-            "ui_width": 3,
-            "name": "hashtag",
-            "doc_link": true,
-            "type": "string",
-            "default": ""
-        }, {
-            "title": "IRC",
-            "ui_width": 3,
-            "name": "irc",
             "doc_link": true,
             "type": "string",
             "default": ""
