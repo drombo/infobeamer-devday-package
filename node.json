@@ -77,14 +77,6 @@
         "type": "duration",
         "hint": "How long to display current talk information",
         "default": 15
-    }, {
-        "title": "Room info (seconds)",
-        "ui_width": 4,
-        "name": "room_info",
-        "doc_link": true,
-        "type": "duration",
-        "hint": "How long to display room information",
-        "default": 10
     },
 
     {
