@@ -1,0 +1,6 @@
+{
+    "name": "devday.17 info-beamer Display",
+    "author": "drombo@drombo.de",
+    "desc": "Show information about upcoming talks on devday.17",
+    "repository": "https://github.com/drombo/infobeamer-devday-package.git"
+}
