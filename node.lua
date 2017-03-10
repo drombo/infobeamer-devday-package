@@ -405,7 +405,7 @@ function node.render()
     util.draw_correct(CONFIG.logo.ensure_loaded(), 20, line_1y, 300, 120)
 
     -- zeichne Uhrzeit
-    CONFIG.font:write(NATIVE_WIDTH-350, line_1y, "{" .. clock.get() .. "}", 100, CONFIG.foreground_color.rgba())
+    CONFIG.font:write(NATIVE_WIDTH-350, line_1y, clock.get() , 100, CONFIG.foreground_color.rgba())
 
     -- Zeichne Raumname
     CONFIG.font:write(300, line_2y, current_room.name_short, 100, CONFIG.foreground_color.rgba())
