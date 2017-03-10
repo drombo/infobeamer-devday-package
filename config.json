@@ -2,9 +2,9 @@
   "font":{"asset_name":"roboto-regular.ttf","filename":"Roboto-Regular.ttf"},
 	"background":{"asset_name":"hero-bg.png","type":"image","filename":"hero-bg.png"},
 	"logo":{"asset_name":"logo-2x.png","type":"image","filename":"logo-2x.png"},
-	"other_rooms":4,
+	"other_rooms":10,
 	"room_info":4,
-	"current_room":4,
+	"current_room":10,
   "background_color":{"a":1,"b":0.403921568627451,"rgba":[0.21568627450980393,0.23529411764705882,0.403921568627451,1],"g":0.23529411764705882,"r":0.21568627450980393,"hex":"373c67"},
   "foreground_color":{"a":1,"b":0.6,"rgba":[0.6,0.6,0.6,1],"g":0.6,"r":0.6,"hex":"999999"},
   "rooms":[
