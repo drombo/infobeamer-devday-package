@@ -8,7 +8,7 @@ local current_room
 
 local line_1y=20
 local line_2y=line_1y+100
-local line_3y=line_2y+120
+local line_3y=line_2y+200
 local spacer_y=line_3y+80
 local line_4y=spacer_y+30
 
