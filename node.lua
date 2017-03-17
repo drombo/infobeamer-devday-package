@@ -379,10 +379,10 @@ local content = switcher(function()
                     if idx >= 5 then
                         break
                     end
-                    CONFIG.font:write(400, line_4y - 60 + 60 * idx, line, 50, CONFIG.foreground_color.rgba())
+                    CONFIG.font:write(300, line_4y - 60 + 60 * idx, line, 50, CONFIG.foreground_color.rgba())
                 end
                 for i, speaker in ipairs(current_talk.speakers) do
-                    CONFIG.font:write(400, 600 + 50 * i, speaker, 50, CONFIG.foreground_color.rgb_with_a(0.8))
+                    CONFIG.font:write(300, 600 + 50 * i, speaker, 50, CONFIG.foreground_color.rgb_with_a(0.8))
                 end
             end
         end
