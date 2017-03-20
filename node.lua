@@ -289,9 +289,9 @@ local content = switcher(function()
 
                 return function()
                     CONFIG.font:write(30, y, talk.start_str, 50, CONFIG.foreground_color.rgb_with_a(alpha))
-                    CONFIG.font:write(190, y, rooms[talk.place].name_short, 50, CONFIG.foreground_color.rgb_with_a(alpha))
-                    CONFIG.font:write(WIDTH-500, y, top_line, 30, CONFIG.foreground_color.rgb_with_a(alpha))
-                    CONFIG.font:write(WIDTH-500, y+28, bottom_line, 30, CONFIG.foreground_color.rgb_with_a(alpha*0.6))
+                    CONFIG.font:write(300, y, rooms[talk.place].name_short, 50, CONFIG.foreground_color.rgb_with_a(alpha))
+                    CONFIG.font:write(WIDTH-1000, y, top_line, 30, CONFIG.foreground_color.rgb_with_a(alpha))
+                    CONFIG.font:write(WIDTH-1000, y+28, bottom_line, 30, CONFIG.foreground_color.rgb_with_a(alpha*0.6))
 
                     if sys.now() > switch then
                         next_line()
@@ -311,8 +311,8 @@ local content = switcher(function()
 
                 return function()
                     CONFIG.font:write(30, y, talk.start_str, 50, CONFIG.foreground_color.rgb_with_a(alpha))
-                    CONFIG.font:write(190, y, rooms[talk.place].name_short, 50, CONFIG.foreground_color.rgb_with_a(alpha))
-                    CONFIG.font:write(WIDTH-500, y, talk.title, 50, CONFIG.foreground_color.rgb_with_a(alpha))
+                    CONFIG.font:write(300, y, rooms[talk.place].name_short, 50, CONFIG.foreground_color.rgb_with_a(alpha))
+                    CONFIG.font:write(WIDTH-1000, y, talk.title, 50, CONFIG.foreground_color.rgb_with_a(alpha))
                 end
             end
 
@@ -366,12 +366,12 @@ local content = switcher(function()
                 end
                 spacer:draw(0, spacer_y, WIDTH, spacer_y+2, 0.6)
 
-                CONFIG.font:write(130, line_4y, current_talk.start_str, 50, CONFIG.foreground_color.rgba())
+                CONFIG.font:write(30, line_4y, current_talk.start_str, 50, CONFIG.foreground_color.rgba())
 
                 if delta > 180*60 then
-                    CONFIG.font:write(130, line_4y + 60, string.format("in %d h", math.floor(delta/3660)+1), 50, CONFIG.foreground_color.rgb_with_a(0.8))
+                    CONFIG.font:write(30, line_4y + 60, string.format("in %d h", math.floor(delta/3660)+1), 50, CONFIG.foreground_color.rgb_with_a(0.8))
                 elseif delta > 0 then
-                    CONFIG.font:write(130, line_4y + 60, string.format("in %d min", math.floor(delta/60)+1), 50, CONFIG.foreground_color.rgb_with_a(0.8))
+                    CONFIG.font:write(30, line_4y + 60, string.format("in %d min", math.floor(delta/60)+1), 50, CONFIG.foreground_color.rgb_with_a(0.8))
                 end
 
                 -- Talk im aktuellen Raum
@@ -382,7 +382,7 @@ local content = switcher(function()
                     CONFIG.font:write(300, line_4y - 60 + 60 * idx, line, 50, CONFIG.foreground_color.rgba())
                 end
                 for i, speaker in ipairs(current_talk.speakers) do
-                    CONFIG.font:write(300, 600 + 50 * i, speaker, 50, CONFIG.foreground_color.rgb_with_a(0.8))
+                    CONFIG.font:write(300, HEIGHT-200 + 50 * i, speaker, 50, CONFIG.foreground_color.rgb_with_a(0.8))
                 end
             end
         end
