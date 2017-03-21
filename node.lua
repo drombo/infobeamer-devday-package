@@ -12,6 +12,13 @@ local line_3y=line_2y+200
 local spacer_y=line_3y+80
 local line_4y=spacer_y+30
 
+local font_size_header = 100
+local font_size_top_line = 80
+local font_size_text = 60
+
+local col1_x = 30
+local col2_x = 300
+
 util.resource_loader{
     "progress.frag",
 }
@@ -65,10 +72,10 @@ function check_next_talk()
     end
 
     for room, talk in pairs(room_next) do
-        talk.slide_lines = wrap(talk.title, 55)
+        talk.slide_lines = wrap(talk.title, 50)
 
         if #talk.title > 17 then
-            talk.lines = wrap(talk.title, 55)
+            talk.lines = wrap(talk.title, 50)
             if #talk.lines == 1 then
                 talk.lines[2] = table.concat(talk.speakers, ", ")
             end
@@ -288,10 +295,10 @@ local content = switcher(function()
                 local switch = sys.now() + 3
 
                 return function()
-                    CONFIG.font:write(30, y, talk.start_str, 60, CONFIG.foreground_color.rgb_with_a(alpha))
-                    CONFIG.font:write(300, y, rooms[talk.place].name_short, 60, CONFIG.foreground_color.rgb_with_a(alpha))
-                    CONFIG.font:write(WIDTH-1000, y, top_line, 30, CONFIG.foreground_color.rgb_with_a(alpha))
-                    CONFIG.font:write(WIDTH-1000, y+32, bottom_line, 30, CONFIG.foreground_color.rgb_with_a(alpha*0.8))
+                    CONFIG.font:write(col1_x, y, talk.start_str, font_size_text, CONFIG.foreground_color.rgb_with_a(alpha))
+                    CONFIG.font:write(col2_x, y, rooms[talk.place].name_short, font_size_text, CONFIG.foreground_color.rgb_with_a(alpha))
+                    CONFIG.font:write(WIDTH-1000, y, top_line, font_size_text/2, CONFIG.foreground_color.rgb_with_a(alpha))
+                    CONFIG.font:write(WIDTH-1000, y+(font_size_text/2)+2, bottom_line, font_size_text/2, CONFIG.foreground_color.rgb_with_a(alpha*0.8))
 
                     if sys.now() > switch then
                         next_line()
@@ -310,9 +317,9 @@ local content = switcher(function()
                 end
 
                 return function()
-                    CONFIG.font:write(30, y, talk.start_str, 60, CONFIG.foreground_color.rgb_with_a(alpha))
-                    CONFIG.font:write(300, y, rooms[talk.place].name_short, 60, CONFIG.foreground_color.rgb_with_a(alpha))
-                    CONFIG.font:write(WIDTH-1000, y, talk.title, 60, CONFIG.foreground_color.rgb_with_a(alpha))
+                    CONFIG.font:write(col1_x, y, talk.start_str, font_size_text, CONFIG.foreground_color.rgb_with_a(alpha))
+                    CONFIG.font:write(col2_x, y, rooms[talk.place].name_short, font_size_text, CONFIG.foreground_color.rgb_with_a(alpha))
+                    CONFIG.font:write(WIDTH-1000, y, talk.title, font_size_text, CONFIG.foreground_color.rgb_with_a(alpha))
                 end
             end
 
@@ -333,16 +340,17 @@ local content = switcher(function()
                     else
                         add_content(mk_talk(y, talk, not time_sep))
                     end
+                    -- abstand 'other talks' zeilen
                     y = y + 80
                 end
             else
-                CONFIG.font:write(300, line_4y, "No other talks.", 60, CONFIG.foreground_color.rgba())
+                CONFIG.font:write(col2_x, line_4y, "No other talks.", font_size_text, CONFIG.foreground_color.rgba())
             end
 
             return content
         end;
         draw = function(content)
-            CONFIG.font:write(300, line_3y, "Other talks", 80, CONFIG.foreground_color.rgba())
+            CONFIG.font:write(col2_x, line_3y, "Other talks", font_size_top_line, CONFIG.foreground_color.rgba())
             spacer:draw(0, spacer_y, WIDTH, spacer_y+2, 0.6)
             for _, func in ipairs(content) do
                 func()
@@ -354,24 +362,24 @@ local content = switcher(function()
         end;
         draw = function()
             if not current_talk then
-                CONFIG.font:write(300, line_3y, "Next talk", 80, CONFIG.foreground_color.rgba())
+                CONFIG.font:write(col2_x, line_3y, "Next talk", font_size_top_line, CONFIG.foreground_color.rgba())
                 spacer:draw(0, spacer_y, WIDTH, spacer_y+2, 0.6)
-                CONFIG.font:write(300, line_4y, "Nope. That's it.", 60, CONFIG.foreground_color.rgba())
+                CONFIG.font:write(col2_x, line_4y, "Nope. That's it.", font_size_text, CONFIG.foreground_color.rgba())
             else
                 local delta = current_talk.start_unix - get_now()
                 if delta > 0 then
-                    CONFIG.font:write(300, line_3y, "Next talk", 80, CONFIG.foreground_color.rgba())
+                    CONFIG.font:write(col2_x, line_3y, "Next talk", font_size_top_line, CONFIG.foreground_color.rgba())
                 else
-                    CONFIG.font:write(300, line_3y, "This talk", 80, CONFIG.foreground_color.rgba())
+                    CONFIG.font:write(col2_x, line_3y, "This talk", font_size_top_line, CONFIG.foreground_color.rgba())
                 end
                 spacer:draw(0, spacer_y, WIDTH, spacer_y+2, 0.6)
 
-                CONFIG.font:write(30, line_4y, current_talk.start_str, 60, CONFIG.foreground_color.rgba())
+                CONFIG.font:write(col1_x, line_4y, current_talk.start_str, font_size_text, CONFIG.foreground_color.rgba())
 
                 if delta > 180*60 then
-                    CONFIG.font:write(30, line_4y + 60, string.format("in %d h", math.floor(delta/3660)+1), 60, CONFIG.foreground_color.rgb_with_a(0.8))
+                    CONFIG.font:write(col1_x, line_4y + font_size_text, string.format("in %d h", math.floor(delta/3660)+1), font_size_text, CONFIG.foreground_color.rgb_with_a(0.8))
                 elseif delta > 0 then
-                    CONFIG.font:write(30, line_4y + 60, string.format("in %d min", math.floor(delta/60)+1), 60, CONFIG.foreground_color.rgb_with_a(0.8))
+                    CONFIG.font:write(col1_x, line_4y + font_size_text, string.format("in %d min", math.floor(delta/60)+1), font_size_text, CONFIG.foreground_color.rgb_with_a(0.8))
                 end
 
                 -- Talk im aktuellen Raum
@@ -379,10 +387,10 @@ local content = switcher(function()
                     if idx >= 5 then
                         break
                     end
-                    CONFIG.font:write(300, line_4y - 60 + 60 * idx, line, 60, CONFIG.foreground_color.rgba())
+                    CONFIG.font:write(col2_x, line_4y - font_size_text + font_size_text * idx, line, font_size_text, CONFIG.foreground_color.rgba())
                 end
                 for i, speaker in ipairs(current_talk.speakers) do
-                    CONFIG.font:write(300, HEIGHT-200 + 50 * i, speaker, 60, CONFIG.foreground_color.rgb_with_a(0.8))
+                    CONFIG.font:write(col2_x, HEIGHT-200 + 50 * i, speaker, font_size_text, CONFIG.foreground_color.rgb_with_a(0.8))
                 end
             end
         end
@@ -405,10 +413,10 @@ function node.render()
     util.draw_correct(CONFIG.logo.ensure_loaded(), 20, line_1y, 300, 120)
 
     -- zeichne Uhrzeit
-    CONFIG.font:write(NATIVE_WIDTH-350, line_1y, clock.get() , 100, CONFIG.foreground_color.rgba())
+    CONFIG.font:write(NATIVE_WIDTH-350, line_1y, clock.get() , font_size_header, CONFIG.foreground_color.rgba())
 
     -- Zeichne Raumname
-    CONFIG.font:write(300, line_2y, current_room.name_short, 100, CONFIG.foreground_color.rgba())
+    CONFIG.font:write(col2_x, line_2y, current_room.name_short, font_size_header, CONFIG.foreground_color.rgba())
 
 
     local fov = math.atan2(HEIGHT, WIDTH*2) * 360 / math.pi
