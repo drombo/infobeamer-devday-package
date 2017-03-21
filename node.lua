@@ -68,7 +68,7 @@ function check_next_talk()
         talk.slide_lines = wrap(talk.title, 55)
 
         if #talk.title > 17 then
-            talk.lines = wrap(talk.title, 38)
+            talk.lines = wrap(talk.title, 55)
             if #talk.lines == 1 then
                 talk.lines[2] = table.concat(talk.speakers, ", ")
             end
@@ -291,7 +291,7 @@ local content = switcher(function()
                     CONFIG.font:write(30, y, talk.start_str, 60, CONFIG.foreground_color.rgb_with_a(alpha))
                     CONFIG.font:write(300, y, rooms[talk.place].name_short, 60, CONFIG.foreground_color.rgb_with_a(alpha))
                     CONFIG.font:write(WIDTH-1000, y, top_line, 30, CONFIG.foreground_color.rgb_with_a(alpha))
-                    CONFIG.font:write(WIDTH-1000, y+28, bottom_line, 30, CONFIG.foreground_color.rgb_with_a(alpha*0.6))
+                    CONFIG.font:write(WIDTH-1000, y+32, bottom_line, 30, CONFIG.foreground_color.rgb_with_a(alpha*0.8))
 
                     if sys.now() > switch then
                         next_line()
@@ -333,10 +333,10 @@ local content = switcher(function()
                     else
                         add_content(mk_talk(y, talk, not time_sep))
                     end
-                    y = y + 62
+                    y = y + 80
                 end
             else
-                CONFIG.font:write(300, line_4y, "No other talks.", 50, CONFIG.foreground_color.rgba())
+                CONFIG.font:write(300, line_4y, "No other talks.", 60, CONFIG.foreground_color.rgba())
             end
 
             return content
