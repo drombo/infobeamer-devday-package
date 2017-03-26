@@ -35,18 +35,13 @@ local rooms
 local spacer = white
 
 node.event("config_update", function(config)
-    print("event config_update")
     rooms = {}
     for idx, room in ipairs(config.rooms) do
-        print(room.name)
         if room.serial == sys.get_env("SERIAL") then
             print("found my room")
             current_room = room
         end
         rooms[room.name] = room
-    end
-    if current_room == nil then
-        current_room = rooms["Foyer"]
     end
     spacer = resource.create_colored_texture(CONFIG.foreground_color.rgba())
 end)
@@ -63,7 +58,6 @@ function get_now()
 end
 
 function check_next_talk()
-    print("check_next_talk")
     local now = get_now()
     local room_next = {}
     for idx, talk in ipairs(schedule) do
@@ -162,7 +156,6 @@ util.data_mapper{
 }
 
 function switcher(get_screens)
-    print("switcher")
     local current_idx = 0
     local current
     local current_state
@@ -219,7 +212,6 @@ function switcher(get_screens)
     end
 
     local function draw()
-        --print("draw")
         local now = sys.now()
 
         local percent = ((now - switched) / (switch - switched)) * 3.14129 * 2 - 3.14129
@@ -407,7 +399,6 @@ function node.render()
     content.prepare()
 
     CONFIG.background_color.clear()
-    --CONFIG.background.ensure_loaded():draw(0, 0, WIDTH, HEIGHT)
     util.draw_correct(CONFIG.background.ensure_loaded(), 0, 0, WIDTH, HEIGHT)
 
     -- zeichne Logo
