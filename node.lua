@@ -338,17 +338,20 @@ local content = switcher(function()
                         -- abstand 'other talks' zeilen
                         y = y + 80
                     end
-                else
-                    CONFIG.font:write(col2_x, line4_y, "No other talks.", font_size_text, CONFIG.foreground_color.rgba())
                 end
 
                 return content
             end;
+            
             draw = function(content)
                 CONFIG.font:write(col2_x, line3_y, "Other talks", font_size_top_line, CONFIG.foreground_color.rgba())
                 spacer:draw(0, spacer_y, WIDTH, spacer_y + 2, 0.6)
-                for _, func in ipairs(content) do
-                    func()
+                if #all_talks > 0 then
+                    for _, func in ipairs(content) do
+                        func()
+                    end
+                else
+                    CONFIG.font:write(col2_x, line4_y, "No other talks.", font_size_text, CONFIG.foreground_color.rgba())
                 end
             end
         }, {
