@@ -55,6 +55,7 @@ def main():
                 speakers = event['speakers'],
                 start_str = event['start_str'],
                 title = event['title'],
+                abstract = event['abstract'],
                 type = event['type'],
                 start_unix = event['start_unix'],
                 end_unix = event['end_unix'],
