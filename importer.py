@@ -2,7 +2,7 @@ from __future__ import print_function
 
 import calendar
 import traceback
-import urllib2
+import urllib
 from datetime import timedelta
 from operator import itemgetter
 
@@ -70,7 +70,7 @@ def get_schedule(url):
         return parsed_events
 
     try:
-        resp = urllib2.urlopen(url)
+        resp = urllib.urlopen(url)
         schedule = resp.read()
         events = load_events(schedule)
     except Exception as err:
