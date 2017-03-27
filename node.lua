@@ -75,6 +75,8 @@ function check_next_talk()
                 talk.lines[2] = table.concat(talk.speakers, ", ")
             end
         end
+
+        talk.slide_abstract = wrap(talk.abstract, 80)
     end
 
     if room_next[current_room.name] then
@@ -387,6 +389,14 @@ local content = switcher(function()
                         end
                         CONFIG.font:write(col2_x, line4_y - font_size_text + font_size_text * idx, line, font_size_text, CONFIG.foreground_color.rgba())
                     end
+
+                    for idx, abstract in ipairs(current_talk.slide_abstract) do
+                        if idx >= 15 then
+                            break
+                        end
+                        CONFIG.font:write(col2_x, 150+line4_y - 32 + 32 * idx, abstract, 30, CONFIG.foreground_color.rgba())
+                    end
+
                     for i, speaker in ipairs(current_talk.speakers) do
                         CONFIG.font:write(col2_x, HEIGHT - 200 + 50 * i, speaker, font_size_text, CONFIG.foreground_color.rgb_with_a(0.8))
                     end
