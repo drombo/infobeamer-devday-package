@@ -6,19 +6,25 @@ local json = require "json"
 local schedule
 local current_room
 
-local line1_y = 20
-local line2_y = line1_y + 100
-local line3_y = line2_y + 200
-local spacer_y = line3_y + 80
-local line4_y = spacer_y + 30
+local best_width = 1920
+local best_height = 1200
 
-local font_size_header = 100
-local font_size_top_line = 80
-local font_size_text = 60
+local scale_width = NATIVE_WIDTH / best_width
+local scale_height = NATIVE_HEIGHT / best_height
 
-local col1_x = 30
-local col2_x = 300
-local col3_x = WIDTH - 1000
+local line1_y = 20 * scale_height
+local line2_y = line1_y + 100  * scale_height
+local line3_y = line2_y + 200  * scale_height
+local spacer_y = line3_y + 80  * scale_height
+local line4_y = spacer_y + 30  * scale_height
+
+local font_size_header = 100 * scale_height
+local font_size_top_line = 80 * scale_height
+local font_size_text = 60 * scale_height
+
+local col1_x = 30 * scale_width
+local col2_x = 300 * scale_width
+local col3_x = WIDTH - 1000 * scale_width
 
 util.resource_loader {
     "progress.frag",
@@ -416,11 +422,12 @@ function node.render()
     CONFIG.background_color.clear()
     util.draw_correct(CONFIG.background.ensure_loaded(), 0, 0, WIDTH, HEIGHT)
 
-    -- zeichne Logo
-    util.draw_correct(CONFIG.logo.ensure_loaded(), 20, line1_y, 300, 120)
+    -- zeichne Logo (302x80)
+    util.draw_correct(CONFIG.logo.ensure_loaded(), 20, line1_y, 350, font_size_header))
 
     -- zeichne Uhrzeit
-    CONFIG.font:write(NATIVE_WIDTH - 350, line1_y, clock.get(), font_size_header, CONFIG.foreground_color.rgba())
+    clock_width = CONFIG.font:width(clock.get(), font_size_header)
+    CONFIG.font:write(WIDTH - clock_width - 10 , line1_y, clock.get(), font_size_header, CONFIG.foreground_color.rgba())
 
     -- Zeichne Raumname
     CONFIG.font:write(col2_x, line2_y, current_room.name_short, font_size_header, CONFIG.foreground_color.rgba())
