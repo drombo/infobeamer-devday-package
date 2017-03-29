@@ -426,7 +426,7 @@ function node.render()
     util.draw_correct(CONFIG.background.ensure_loaded(), 0, 0, WIDTH, HEIGHT)
 
     -- zeichne Logo (302x80)
-    util.draw_correct(CONFIG.logo.ensure_loaded(), 20, line1_y, 350, font_size_header))
+    util.draw_correct(CONFIG.logo.ensure_loaded(), 20, line1_y, 350, font_size_header)
 
     -- zeichne Uhrzeit
     clock_width = CONFIG.font:width(clock.get(), font_size_header)
