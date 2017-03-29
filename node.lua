@@ -23,8 +23,7 @@ local spacer_y = line3_y + font_size_top_line
 local line4_y = spacer_y + line_spacing
 
 local col1_x = 30 * scale_width
-local col2_x = 300 * scale_width
-local col3_x = WIDTH - 1000 * scale_width
+local col2_x = 260 * scale_width
 
 util.resource_loader {
     "progress.frag",
@@ -269,6 +268,10 @@ local content = switcher(function()
                     end
                 end
 
+                -- TODO: längsten Raumnamen selbst holen
+                local longest_col2_width = CONFIG.font:width("St. Petersburg", font_size_text)
+                local col3_x = col2_x + longest_col2_width + col1_x*2
+            
                 -- multi line
                 local function mk_talkmulti(y, talk, is_running)
                     local alpha
@@ -299,7 +302,7 @@ local content = switcher(function()
 
                     return function()
                         CONFIG.font:write(col1_x, y, talk.start_str, font_size_text, CONFIG.foreground_color.rgb_with_a(alpha))
-                        CONFIG.font:write(col2_x, y, rooms[talk.place].name_short, font_size_text, CONFIG.foreground_color.rgb_with_a(alpha))
+                        CONFIG.font:write(col2_x, y, rooms[talk.place].name, font_size_text, CONFIG.foreground_color.rgb_with_a(alpha))
                         CONFIG.font:write(col3_x, y, top_line, font_size_text / 2, CONFIG.foreground_color.rgb_with_a(alpha))
                         CONFIG.font:write(col3_x, y + (font_size_text / 2) + 2, bottom_line, font_size_text / 2, CONFIG.foreground_color.rgb_with_a(alpha * 0.8))
 
@@ -321,7 +324,7 @@ local content = switcher(function()
 
                     return function()
                         CONFIG.font:write(col1_x, y, talk.start_str, font_size_text, CONFIG.foreground_color.rgb_with_a(alpha))
-                        CONFIG.font:write(col2_x, y, rooms[talk.place].name_short, font_size_text, CONFIG.foreground_color.rgb_with_a(alpha))
+                        CONFIG.font:write(col2_x, y, rooms[talk.place].name, font_size_text, CONFIG.foreground_color.rgb_with_a(alpha))
                         CONFIG.font:write(col3_x, y, talk.title, font_size_text, CONFIG.foreground_color.rgb_with_a(alpha))
                     end
                 end
