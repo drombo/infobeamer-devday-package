@@ -14,6 +14,7 @@ local scale_height = HEIGHT / best_height
 local font_size_header = 100 * scale_height
 local font_size_top_line = font_size_header * 0.8
 local font_size_text = font_size_top_line * 0.75
+local font_size_text_small = font_size_text / 2
 local line_spacing = font_size_header * 0.2
 
 local line1_y = line_spacing/2
@@ -24,6 +25,11 @@ local line4_y = spacer_y + line_spacing
 
 local col1_x = 30 * scale_width
 local col2_x = 260 * scale_width
+local col3_x = 500
+
+local title_width_single = 50
+local title_width_multi = 50
+local text_width_abstract = 80
 
 util.resource_loader {
     "progress.frag",
@@ -72,16 +78,16 @@ function check_next_talk()
     end
 
     for room, talk in pairs(room_next) do
-        talk.slide_lines = wrap(talk.title, 50)
+        talk.slide_lines = wrap(talk.title, title_width_single)
 
         if #talk.title > 17 then
-            talk.lines = wrap(talk.title, 50)
+            talk.lines = wrap(talk.title, title_width_multi)
             if #talk.lines == 1 then
                 talk.lines[2] = table.concat(talk.speakers, ", ")
             end
         end
 
-        talk.slide_abstract = wrap(talk.abstract, 80)
+        talk.slide_abstract = wrap(talk.abstract, text_width_abstract)
     end
 
     if room_next[current_room.name] then
@@ -270,8 +276,14 @@ local content = switcher(function()
 
                 -- TODO: längsten Raumnamen selbst holen
                 local longest_col2_width = CONFIG.font:width("St. Petersburg", font_size_text)
-                local col3_x = col2_x + longest_col2_width + col1_x*2
-            
+                col3_x = col2_x + longest_col2_width + col1_x*2
+
+                local space_width_title = CONFIG.font:width("s", font_size_text)
+                local space_width_small = CONFIG.font:width("s", font_size_text_small)
+                title_width_single = (WIDTH - col2_x)/space_width_title
+                title_width_multi = (WIDTH - col3_x)/space_width_small
+                text_width_abstract = (WIDTH - col2_x)/space_width_small
+
                 -- multi line
                 local function mk_talkmulti(y, talk, is_running)
                     local alpha
@@ -303,8 +315,8 @@ local content = switcher(function()
                     return function()
                         CONFIG.font:write(col1_x, y, talk.start_str, font_size_text, CONFIG.foreground_color.rgb_with_a(alpha))
                         CONFIG.font:write(col2_x, y, rooms[talk.place].name, font_size_text, CONFIG.foreground_color.rgb_with_a(alpha))
-                        CONFIG.font:write(col3_x, y, top_line, font_size_text / 2, CONFIG.foreground_color.rgb_with_a(alpha))
-                        CONFIG.font:write(col3_x, y + (font_size_text / 2) + 2, bottom_line, font_size_text / 2, CONFIG.foreground_color.rgb_with_a(alpha * 0.8))
+                        CONFIG.font:write(col3_x, y, top_line, font_size_text_small, CONFIG.foreground_color.rgb_with_a(alpha))
+                        CONFIG.font:write(col3_x, y + font_size_text_small + 2, bottom_line, font_size_text_small, CONFIG.foreground_color.rgb_with_a(alpha * 0.8))
 
                         if sys.now() > switch then
                             next_line()
@@ -403,7 +415,7 @@ local content = switcher(function()
                         if idx >= 15 then
                             break
                         end
-                        CONFIG.font:write(col2_x, 150+line4_y - 32 + 32 * idx, abstract, 30, CONFIG.foreground_color.rgba())
+                        CONFIG.font:write(col2_x, 150+line4_y - 32 + 32 * idx, abstract, font_size_text_small, CONFIG.foreground_color.rgba())
                     end
 
                     for i, speaker in ipairs(current_talk.speakers) do
