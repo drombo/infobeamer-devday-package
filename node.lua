@@ -383,9 +383,9 @@ local content = switcher(function()
                     CONFIG.font:write(col1_x, line4_y, current_talk.start_str, font_size_text, CONFIG.foreground_color.rgba())
 
                     if delta > 180 * 60 then
-                        CONFIG.font:write(col1_x, line4_y + font_size_text, string.format("in %d h", math.floor(delta / 3660) + 1), font_size_text, CONFIG.foreground_color.rgb_with_a(0.8))
+                        CONFIG.font:write(col1_x, line4_y + font_size_text, string.format("in %d h", math.floor(delta / 3660) + 1), font_size_text/1.5, CONFIG.foreground_color.rgb_with_a(0.8))
                     elseif delta > 0 then
-                        CONFIG.font:write(col1_x, line4_y + font_size_text, string.format("in %d min", math.floor(delta / 60) + 1), font_size_text, CONFIG.foreground_color.rgb_with_a(0.8))
+                        CONFIG.font:write(col1_x, line4_y + font_size_text, string.format("in %d min", math.floor(delta / 60) + 1), font_size_text/1.5, CONFIG.foreground_color.rgb_with_a(0.8))
                     end
 
                     -- Talk im aktuellen Raum
