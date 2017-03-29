@@ -415,7 +415,8 @@ local content = switcher(function()
                         if idx >= 15 then
                             break
                         end
-                        CONFIG.font:write(col2_x, 150+line4_y - 32 + 32 * idx, abstract, font_size_text_small, CONFIG.foreground_color.rgba())
+                        local abstract_y = #current_talk.slide_lines * font_size_text + line_spacing
+                        CONFIG.font:write(col2_x, line4_y + abstract_y - font_size_text_small + (font_size_text_small+line_spacing/2) * idx, abstract, font_size_text_small, CONFIG.foreground_color.rgba())
                     end
 
                     for i, speaker in ipairs(current_talk.speakers) do
