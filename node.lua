@@ -8,19 +8,19 @@ local current_room
 
 local best_width = 1920
 local best_height = 1200
-
-local scale_width = NATIVE_WIDTH / best_width
-local scale_height = NATIVE_HEIGHT / best_height
-
-local line1_y = 20 * scale_height
-local line2_y = line1_y + 100  * scale_height
-local line3_y = line2_y + 200  * scale_height
-local spacer_y = line3_y + 80  * scale_height
-local line4_y = spacer_y + 30  * scale_height
+local scale_width = WIDTH / best_width
+local scale_height = HEIGHT / best_height
 
 local font_size_header = 100 * scale_height
-local font_size_top_line = 80 * scale_height
-local font_size_text = 60 * scale_height
+local font_size_top_line = font_size_header * 0.8
+local font_size_text = font_size_top_line * 0.75
+local line_spacing = font_size_header * 0.2
+
+local line1_y = line_spacing/2
+local line2_y = line1_y + font_size_header
+local line3_y = line2_y + font_size_top_line + line_spacing * 2
+local spacer_y = line3_y + font_size_top_line
+local line4_y = spacer_y + line_spacing
 
 local col1_x = 30 * scale_width
 local col2_x = 300 * scale_width
