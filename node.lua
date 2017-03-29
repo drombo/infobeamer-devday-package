@@ -408,14 +408,14 @@ local content = switcher(function()
                         if idx >= 5 then
                             break
                         end
-                        CONFIG.font:write(col2_x, line4_y - font_size_text + font_size_text * idx, line, font_size_text, CONFIG.foreground_color.rgba())
+                        CONFIG.font:write(col2_x, line4_y - font_size_text + (font_size_text+line_spacing/2) * idx, line, font_size_text, CONFIG.foreground_color.rgba())
                     end
 
                     for idx, abstract in ipairs(current_talk.slide_abstract) do
                         if idx >= 15 then
                             break
                         end
-                        local abstract_y = #current_talk.slide_lines * font_size_text + line_spacing
+                        local abstract_y = #current_talk.slide_lines * font_size_text + line_spacing + line_spacing/2
                         CONFIG.font:write(col2_x, line4_y + abstract_y - font_size_text_small + (font_size_text_small+line_spacing/2) * idx, abstract, font_size_text_small, CONFIG.foreground_color.rgba())
                     end
 
@@ -439,7 +439,8 @@ function node.render()
     util.draw_correct(CONFIG.background.ensure_loaded(), 0, 0, WIDTH, HEIGHT)
 
     -- zeichne Logo (302x80)
-    util.draw_correct(CONFIG.logo.ensure_loaded(), 20, line1_y, 350, font_size_header)
+    imagewidth, imageheight = CONFIG.logo.ensure_loaded():size()
+    util.draw_correct(CONFIG.logo.ensure_loaded(), col1_x, line1_y, imagewidth * scale_width, imageheight * scale_height)
 
     -- zeichne Uhrzeit
     clock_width = CONFIG.font:width(clock.get(), font_size_header)
