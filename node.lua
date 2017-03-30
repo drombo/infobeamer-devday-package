@@ -359,7 +359,7 @@ local content = switcher(function()
                             add_content(mk_talk(y, talk, not time_sep))
                         end
                         -- abstand 'other talks' zeilen
-                        y = y + 80
+                        y = y + font_size_text + line_spacing
                     end
                 end
 
@@ -376,6 +376,8 @@ local content = switcher(function()
                 else
                     CONFIG.font:write(col2_x, line4_y, "No other talks.", font_size_text, CONFIG.foreground_color.rgba())
                 end
+                CONFIG.font:write(col2_x/2, HEIGHT - 6 * font_size_text, "Bitte bewertet die Vortrge, per App unter", font_size_text, CONFIG.foreground_color.rgba())
+                CONFIG.font:write(col2_x/2, HEIGHT - 5 * font_size_text + line_spacing , "https://lineupr.com/seco/devday17", font_size_text, CONFIG.foreground_color.rgba())
             end
         }, {
             time = CONFIG.current_room,
@@ -408,7 +410,7 @@ local content = switcher(function()
                         if idx >= 5 then
                             break
                         end
-                        CONFIG.font:write(col2_x, line4_y - font_size_text + (font_size_text+line_spacing/2) * idx, line, font_size_text, CONFIG.foreground_color.rgba())
+                        CONFIG.font:write(col2_x, line4_y - font_size_text + font_size_text * idx + line_spacing/2 * (idx-1), line, font_size_text, CONFIG.foreground_color.rgba())
                     end
 
                     for idx, abstract in ipairs(current_talk.slide_abstract) do
@@ -416,11 +418,11 @@ local content = switcher(function()
                             break
                         end
                         local abstract_y = #current_talk.slide_lines * font_size_text + line_spacing + line_spacing/2
-                        CONFIG.font:write(col2_x, line4_y + abstract_y - font_size_text_small + (font_size_text_small+line_spacing/2) * idx, abstract, font_size_text_small, CONFIG.foreground_color.rgba())
+                        CONFIG.font:write(col2_x, line4_y + abstract_y - font_size_text_small + font_size_text_small * idx + line_spacing/2 * (idx-1), abstract, font_size_text_small, CONFIG.foreground_color.rgba())
                     end
 
                     for i, speaker in ipairs(current_talk.speakers) do
-                        CONFIG.font:write(col2_x, HEIGHT - 200 + 50 * i, speaker, font_size_text, CONFIG.foreground_color.rgb_with_a(0.8))
+                        CONFIG.font:write(col2_x, HEIGHT - 3 * font_size_text, speaker, font_size_text, CONFIG.foreground_color.rgba())
                     end
                 end
             end
