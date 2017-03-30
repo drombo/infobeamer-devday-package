@@ -376,8 +376,8 @@ local content = switcher(function()
                 else
                     CONFIG.font:write(col2_x, line4_y, "No other talks.", font_size_text, CONFIG.foreground_color.rgba())
                 end
-                CONFIG.font:write(col2_x/2, HEIGHT - 6 * font_size_text, "Bitte bewertet die Vorträge, per App unter", font_size_text, CONFIG.foreground_color.rgba())
-                CONFIG.font:write(col2_x/2, HEIGHT - 5 * font_size_text + line_spacing , "https://lineupr.com/seco/devday17", font_size_text, CONFIG.foreground_color.rgba())
+                CONFIG.font:write(col2_x/2, HEIGHT - 5 * font_size_text, "Bitte bewertet die Vorträge, per App unter", font_size_text, CONFIG.foreground_color.rgba())
+                CONFIG.font:write(col2_x/2, HEIGHT - 4 * font_size_text + line_spacing , "https://lineupr.com/seco/devday17", font_size_text, CONFIG.foreground_color.rgba())
             end
         }, {
             time = CONFIG.current_room,
@@ -422,7 +422,7 @@ local content = switcher(function()
                     end
 
                     for i, speaker in ipairs(current_talk.speakers) do
-                        CONFIG.font:write(col2_x, HEIGHT - 3 * font_size_text, speaker, font_size_text, CONFIG.foreground_color.rgba())
+                        CONFIG.font:write(col2_x, HEIGHT - 2 * font_size_text, speaker, font_size_text, CONFIG.foreground_color.rgba())
                     end
                 end
             end
